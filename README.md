@@ -1,7 +1,11 @@
 # Django SMS
 
-
 基于Django的短信模块
+
+## Platforms
+
+- [x] [253](https://zz.253.com/v5.html#/api_doc)
+- [ ] [阿里云](https://help.aliyun.com/product/44282.html)
 
 ## Quick start
 
