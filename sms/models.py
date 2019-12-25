@@ -1,7 +1,4 @@
-import datetime
-import json
 import logging
-import urllib.request
 
 from django.conf import settings
 from django.core.cache import cache
@@ -11,6 +8,9 @@ from django.utils.translation import gettext_lazy as _
 logger = logging.getLogger(__name__)
 
 class Template(models.Model):
+    """
+    短信模板
+    """
     label = models.CharField(_('label'), max_length=200)
     code = models.CharField(_('code'), max_length=50, unique=True)
     content = models.TextField(_('content'), blank=True)
@@ -33,45 +33,40 @@ class SmsManager(models.Manager):
         else:
             return False
 
-    def send_sms(self, mobile, template_code, content=None):
+    def send_sms(self, mobile, template_code, content=None, sign=None):
         " 发送短信 "
-        try:
-            template = Template.objects.get(code=template_code)
+        default = settings.SMS.get('default', '253')
+
+        if not Template.objects.filter(code=template_code).exists():
+            return False, '短信模板不存在'
+
+        if default == '253':
+            from .a153 import A253
+            obj = A253()
 
             if content:
                 content = template.content % content
             else:
                 content = template.content
-        except Exception as e:
-            logger.warning(str(e))
+            obj.send_sms(mobile, content)
+        elif default == 'aliyun':
+            from .aliyun import Aliyun
+            obj = Aliyun()
+            obj.send_sms(mobile, sign, template_code, content)
 
-            return False
-        now = datetime.datetime.now()
-        sendtime = now.strftime('%Y%m%d%H%M')
-        data = {
-            'account': settings.SMS['ACCOUNT'],
-            'password': settings.SMS['PASSWORD'],
-            'msg': content,
-            'phone': mobile,
-            'sendtime': sendtime
-        }
-        data = json.dumps(data).encode('utf8')
-        url = 'http://smssh1.253.com/msg/send/json'
-        req = urllib.request.Request(url)
-        req.add_header('Content-Type', 'application/json')
         log = Sms.objects.create(
-                mobile = mobile,
-                template = template,
-                content = content
-                )
-        with urllib.request.urlopen(url=req, data=data) as f:
-            print(f.read().decode('utf-8'))
+            mobile = mobile,
+            template = template,
+            content = content
+        )
 
-        return True
+        return log
+
 
 class Sms(models.Model):
     mobile = models.CharField(_('mobile'), max_length=15)
-    template = models.ForeignKey(Template, on_delete=models.CASCADE, related_name=_('logs'))
+    template = models.ForeignKey(Template, on_delete=models.CASCADE,
+            related_name=_('logs'))
     content = models.TextField(_('content'))
     is_success = models.BooleanField(_('is success'), default=True)
     created = models.DateTimeField(_('created'), auto_now_add=True)
