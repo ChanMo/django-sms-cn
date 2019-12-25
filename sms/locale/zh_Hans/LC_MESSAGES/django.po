@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-08-02 15:44+0800\n"
+"POT-Creation-Date: 2019-11-28 17:29+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,38 +22,42 @@ msgstr ""
 msgid "sms"
 msgstr "短信"
 
-#: sms/models.py:13
-msgid "label"
-msgstr "名称"
-
-#: sms/models.py:14
-msgid "code"
-msgstr "编码"
-
-#: sms/models.py:15 sms/models.py:71
-msgid "content"
-msgstr "内容"
-
-#: sms/models.py:21 sms/models.py:22
-msgid "sms template"
-msgstr "短信模块"
-
-#: sms/models.py:69
+#: sms/forms.py:8 sms/models.py:114
 msgid "mobile"
 msgstr "手机号码"
 
-#: sms/models.py:70
+#: sms/forms.py:9
+msgid "captcha"
+msgstr ""
+
+#: sms/models.py:16
+msgid "label"
+msgstr "名称"
+
+#: sms/models.py:17
+msgid "code"
+msgstr "编码"
+
+#: sms/models.py:18 sms/models.py:116
+msgid "content"
+msgstr "内容"
+
+#: sms/models.py:24 sms/models.py:25
+msgid "sms template"
+msgstr "短信模板"
+
+#: sms/models.py:115
 msgid "logs"
 msgstr "记录"
 
-#: sms/models.py:72
+#: sms/models.py:117
 msgid "is success"
 msgstr "是否成功"
 
-#: sms/models.py:73
+#: sms/models.py:118
 msgid "created"
 msgstr ""
 
-#: sms/models.py:81 sms/models.py:82
+#: sms/models.py:126 sms/models.py:127
 msgid "sms log"
 msgstr "短信记录"
