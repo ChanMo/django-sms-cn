@@ -8,10 +8,12 @@ django_sms_cn.egg-info/SOURCES.txt
 django_sms_cn.egg-info/dependency_links.txt
 django_sms_cn.egg-info/top_level.txt
 sms/__init__.py
+sms/a253.py
 sms/admin.py
+sms/aliyun.py
 sms/apps.py
+sms/forms.py
 sms/models.py
-sms/receivers.py
 sms/tests.py
 sms/urls.py
 sms/views.py
