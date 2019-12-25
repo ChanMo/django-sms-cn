@@ -1,18 +1,18 @@
-# Django SMS
+# Django SMS CN
 
 基于Django的短信模块
 
 ## Platforms
 
 - [x] [253](https://zz.253.com/v5.html#/api_doc)
-- [ ] [阿里云](https://help.aliyun.com/product/44282.html)
+- [x] [阿里云](https://help.aliyun.com/product/44282.html)
 
 ## Quick start
 
-安装`django-sms`
+安装`django-sms-cn`
 
 ```
-$ pip install django-sms
+$ pip install django-sms-cn
 ```
 
 在`settings.py`中修改INSTALLED_APPS
@@ -28,8 +28,9 @@ INSTALLED_APPS = [
 
 ```python
 SMS = {
-    'account': '',
-    'password': ''
+    'default': '253',
+    'appid': '',
+    'secret': ''
 }
 ```
 
