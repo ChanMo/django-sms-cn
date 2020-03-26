@@ -12,6 +12,7 @@
 安装`django-sms-cn`
 
 ```
+$ pip install aliyun-python-sdk-core # 如果需要使用aliyun
 $ pip install django-sms-cn
 ```
 
